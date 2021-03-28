@@ -10,3 +10,8 @@ re 库可以将正则表达式，通过compile的方式更加可视化的方式�
 
 ==判断值是否相等, is判断两个是否指向同一个对象
 <https://www.w3schools.com/python/ref_keyword_is.asp>
+
+
+除法默认的是float.
+
+python 使用()表示当前行并未结束，类似C++中的\
