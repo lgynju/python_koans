@@ -23,10 +23,32 @@ class Proxy:
         # WRITE CODE HERE
 
         #initialize '_obj' attribute last. Trust me on this!
+        self._all_attributes = []
         self._obj = target_object
-
     # WRITE CODE HERE
+    #def power(self):
+    #    return self._obj.power()
 
+    def was_called(self, value):
+        return value in self._all_attributes
+
+    def __getattr__(self, attributeName):
+        self._all_attributes.append(attributeName)
+        return self._obj.__getattribute__(attributeName)
+
+    def __setattr__(self, attributeName, value):
+        self_attrs = ['_all_attributes', '_obj']
+        if attributeName in self_attrs:
+            object.__setattr__(self, attributeName, value)
+        else:
+            self._all_attributes.append(attributeName)
+            self._obj.__setattr__(attributeName, value)
+
+    def messages(self):
+        return self._all_attributes
+
+    def number_of_times_called(self, value):
+        return len([x for x in self._all_attributes if x==value])
 # The proxy object should pass the following Koan:
 #
 class AboutProxyObjectProject(Koan):
